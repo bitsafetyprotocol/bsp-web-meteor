@@ -1,0 +1,10 @@
+<template name="TicketsNew">
+    {{#autoForm collection='Tickets' id='insertTicketForm' type='insert' meteormethod='ticketsInsert'}}
+      <fieldset>
+          <legend>Submit a ticket</legend>
+          {{> afQuickField name='subject' placeholder='Brief case explanation'}}
+          {{> afQuickField name='description' rows=4 placeholder='As much details as possible'}}
+      </fieldset>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    {{/autoForm}}
+</template>
