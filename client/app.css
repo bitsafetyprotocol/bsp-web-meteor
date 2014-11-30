@@ -5,3 +5,46 @@
 body {
     padding-top: 70px;
 }
+
+.panel-info>.panel-footer {
+    background-color: #f7f9fa;
+    border-color: #e9ecef;
+}
+
+.panel.panel-small>.panel-heading,
+.panel.panel-small>.panel-footer,
+.panel.panel-small>.panel-body {
+    padding: 4px 10px;
+    /*font-size: 14px;*/
+}
+
+.panel.panel-xsmall>.panel-heading,
+.panel.panel-xsmall>.panel-footer,
+.panel.panel-xsmall>.panel-body {
+    padding: 0px 5px;
+    font-size: 12px;
+}
+
+.label.label-block { display: block; }
+
+.no-margin-bottom { margin-bottom: 0px !important; }
+.no-margin-top { margin-top: 0px !important; }
+
+
+.table.ticket-changes td {
+    font-size: 18px;
+}
+
+#ticketCommentForm .panel-heading button {
+    margin-top: 2px;
+    line-height: 14px;
+    height: 30px;
+}
+
+#ticketCommentForm .panel-body {
+    padding: 10px;
+}
+
+#ticketCommentForm textarea {
+    resize: none;
+}

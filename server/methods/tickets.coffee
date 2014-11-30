@@ -4,8 +4,13 @@
 
 Meteor.methods
   ticketsDelete: (id) -> Tickets.remove id
+  ticketsDeleteUpdate: (id) -> TicketUpdates.remove id
   ticketsSetStatus: (id, status) -> Tickets.update id, $set: { status: status }
   ticketsClose: (id) -> Meteor.call 'ticketsSetStatus', id, 'closed'
+  ticketsPostComment: (id, comment) ->
+    TicketUpdates.insert
+      ticketId: id
+      comment: comment
 
 #
 #   Example:

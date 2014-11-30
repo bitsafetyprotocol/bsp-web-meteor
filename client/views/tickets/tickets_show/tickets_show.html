@@ -7,147 +7,111 @@
     </ul>
     <div class="row">
         <div class="col-sm-8">
-            <div class="panel {{infoPanelClass ticket.status}}">
+
+            <div class="panel {{infoPanelClass ticket.status}} panel-small">
                 <div class="panel-heading">
-                    <strong>
-                        <a href="{{urlFor 'tickets.show' uid=ticket.uid}}">#{{ticket.uid}}</a>
-                    </strong>
+                    <a href="" class="">
+                        <span class="fui-user"></span> {{ticket.userName}}
+                    </a>
+
                     <small><span class="fui-arrow-right text-muted"></span></small>
-                    {{ticket.subject}}
-                    <div class="pull-right">
-                        <span class="text-muted">{{ticket.status}}</span>
-                    </div>
+
+                    reported
+
+                    <a href="{{urlFor 'tickets.show' uid=ticket.uid}}">
+                        case #{{ticket.uid}}
+                    </a>
+                    <span class="text-muted pull-right">
+                        {{timeAgo ticket.createdAt}}
+                    </span>
                 </div>
                 <div class="panel-body">
+                    <p class="lead">{{ticket.subject}}</p>
                     {{ticket.description}}
                 </div>
             </div>
+
+            {{#each ticket.updates}}
+                {{> TicketUpdatesPartial}}
+            {{/each}}
+
+            {{> TicketShowCommentForm }}
         </div>
 
-        <div class="col-sm-4">
-            <div class="btn-group btn-block">
-                <button class="btn btn-inverse btn-block dropdown-toggle btn-sm" data-toggle="dropdown">
-                    <span class="pull-left text-muted">
-                        <span class="fui-gear"></span>
-                        Status
-                    </span>
-                    <span class="pull-right">
-                        {{ticket.status}}
-                        <b class="caret"></b>
-                    </span>
-                    &nbsp;
-                </button>
-                <ul class="dropdown-menu dropdown-menu-right">
-                    <li class="{{#if $eq ticket.status 'new'}}active{{/if}}">
-                        <a href="" class="setStatusNew">
-                            <span class="fui-alert-circle"></span> &nbsp;
-                            New
-                        </a>
-                    </li>
-                    <li class="{{#if $eq ticket.status 'open'}}active{{/if}}">
-                        <a href="" class="setStatusOpen">
-                            <span class="fui-question-circle"></span> &nbsp;
-                            Open
-                        </a>
-                    </li>
-                    <li class="{{#if $eq ticket.status 'closed'}}active{{/if}}">
-                        <a href="" class="setStatusClosed">
-                            <span class="fui-check"></span> &nbsp;
-                            Closed
-                        </a>
-                    </li>
-                </ul>
-            </div>
+        <div class="col-sm-4">{{> TicketsShowSidebar }}</div>
 
-            <div class="btn-group btn-block">
-                <button class="btn btn-inverse btn-block dropdown-toggle btn-sm" data-toggle="dropdown">
-                    <span class="pull-left text-muted">
-                        <span class="fui-user"></span>
-                        Assignees
-                    </span>
-                    <span class="pull-right">
-                        {{#if ticket.assignees.count}}
-                            ...
-                        {{else}}
-                            None yet
-                        {{/if}}
-                        <b class="caret"></b>
-                    </span>
-                    &nbsp;
-                </button>
-                <ul class="dropdown-menu dropdown-menu-right">
-                    <li>
-                        <a href="">
-                            <span class="fui-home"></span>
-                            &nbsp; View profile
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <span class="fui-chat"></span>
-                            &nbsp; Send message
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <span class="fui-alert-circle"></span>
-                            &nbsp; Report abuse
-                        </a>
-                    </li>
-                </ul>
-            </div>
+    </div>
+</template>
 
-            <div class="btn-group btn-block">
-                <button class="btn btn-inverse btn-block dropdown-toggle btn-sm" data-toggle="dropdown">
-                    <span class="pull-left text-muted">
-                        <span class="fui-user"></span>
-                        Author
-                    </span>
-                    <span class="pull-right">
-                        {{ticket.author.email}}
-                        <b class="caret"></b>
-                    </span>
-                    &nbsp;
-                </button>
-                <ul class="dropdown-menu dropdown-menu-right">
-                    <li>
-                        <a href="">
-                            <span class="fui-home"></span>
-                            &nbsp; View profile
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <span class="fui-chat"></span>
-                            &nbsp; Send message
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <span class="fui-alert-circle"></span>
-                            &nbsp; Report abuse
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <a class="btn btn-default btn-block btn-sm">
-                <span class="pull-left">
-                    <span class="fui-time"></span>
-                    Updated
-                </span>
-                <span class="pull-right">{{timeAgo ticket.updatedAt}}</span>
-                &nbsp;
+<template name="TicketUpdatesPartial">
+    <div class="panel panel-info panel-small">
+        <div class="panel-heading panel-heading-condensed">
+            <a href="" class="">
+                <span class="fui-user"></span> {{userName}}
             </a>
 
-            <a class="btn btn-default btn-block btn-sm">
-                <span class="pull-left">
-                    <span class="fui-time"></span>
-                    Created
-                </span>
-                <span class="pull-right">{{timeAgo ticket.createdAt}}</span>
-                &nbsp;
+            <small><span class="fui-arrow-right text-muted"></span></small>
+
+            updated
+
+            <a href="{{urlFor 'tickets.show' uid=ticket.uid}}">
+                case #{{ticket.uid}}
             </a>
+            <span class="text-muted pull-right">
+                {{timeAgo createdAt}}
+                &nbsp; <button class="close">&times;</button>
+            </span>
+        </div>
+        <div class="panel-body">
+            {{> TicketShowChanges}}
         </div>
     </div>
 </template>
+
+<template name="TicketShowChanges">
+    {{#if comment}}
+    <div class="row">
+        <div class="col-sm-2">
+            <code>comment</code>
+        </div>
+        <div class="col-sm-10">
+            {{comment}}
+        </div>
+    </div>
+    {{/if}}
+    {{#each fields}}
+    <div class="row">
+        <div class="col-sm-3">
+            <code>{{name}}</code>
+        </div>
+        <div class="col-sm-4 text-right text-muted">{{before}}</div>
+        <div class="col-sm-1 text-center">
+            <span class="text-muted fui-arrow-right"></span>
+        </div>
+        <div class="col-sm-4 text-left">{{after}}</div>
+    </div>
+    {{/each}}
+</template>
+
+<template name="TicketShowCommentForm">
+    <div class="panel panel-info panel-small" id="ticketCommentForm">
+        <div class="panel-heading panel-heading-condensed">
+            <a href="" class="">
+                <span class="fui-user"></span> {{ticket.userName}}
+            </a>
+
+            <small><span class="fui-arrow-right text-muted"></span></small>
+
+            new comment for
+
+            <a href="{{urlFor 'tickets.show' uid=ticket.uid}}">
+                case #{{ticket.uid}}
+            </a>
+            <button class="btn btn-info btn-sm pull-right postComment">Send</button>
+        </div>
+        <div class="panel-body">
+            <textarea class="form-control" placeholder="Your comment on this case" rows="4"></textarea>
+        </div>
+    </div>
+</template>
+
