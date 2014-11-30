@@ -3,6 +3,7 @@ Schemas.Ticket = new SimpleSchema
   uid:
     type: Number
     min: 1
+    optional: true
   subject:
     type: String
     max: 200
@@ -15,13 +16,16 @@ Schemas.Ticket = new SimpleSchema
     allowedValues: ['new', 'open', 'closed']
   userId:
     type: String
+    optional: true
   assigneeIds:
     type: [String]
     defaultValue: []
   createdAt:
     type: Date
+    optional: true
   updatedAt:
     type: Date
+    optional: true
 
 Schemas.TicketUpdate = new SimpleSchema
   createdAt:

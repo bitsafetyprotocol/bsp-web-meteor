@@ -1,5 +1,5 @@
 <template name="TicketsNew">
-    {{#autoForm collection='Tickets' id='insertTicketForm' type='insert' meteormethod='ticketsInsert'}}
+    {{#autoForm collection='Tickets' id='newTicket' type='method' meteormethod='ticketsInsert'}}
       <fieldset>
           <legend>Submit a ticket</legend>
           {{> afQuickField name='subject' placeholder='Brief case explanation'}}

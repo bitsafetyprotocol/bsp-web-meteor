@@ -11,6 +11,9 @@ Meteor.methods
     TicketUpdates.insert
       ticketId: id
       comment: comment
+  ticketsInsert: (doc) ->
+    id = Tickets.insert doc
+    Tickets.findOne id
 
 #
 #   Example:

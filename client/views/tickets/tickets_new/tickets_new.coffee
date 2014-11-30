@@ -5,6 +5,7 @@ Template.TicketsNew.events
 #
 
 Template.TicketsNew.helpers
+  ticketSchema: -> Schemas.Ticket
 # Example:
 #   items: ->
 #
@@ -15,3 +16,8 @@ Template.TicketsNew.created = ->
 Template.TicketsNew.rendered = ->
 
 Template.TicketsNew.destroyed = ->
+
+AutoForm.hooks
+  newTicket:
+    onSuccess: (operation, result, template) ->
+      Router.go 'tickets.show', result
