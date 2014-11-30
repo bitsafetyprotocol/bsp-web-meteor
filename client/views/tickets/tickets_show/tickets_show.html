@@ -1,8 +1,153 @@
 <template name="TicketsShow">
+    {{> TicketsIndexSearch }}
     <ul class="breadcrumb">
         <li><a href="/">Home</a></li>
         <li><a href="{{urlFor 'tickets.index'}}">Tickets</a></li>
         <li class="active"><a href="">Ticket #{{ticket.uid}}</a></li>
     </ul>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="panel {{infoPanelClass ticket.status}}">
+                <div class="panel-heading">
+                    <strong>
+                        <a href="{{urlFor 'tickets.show' uid=ticket.uid}}">#{{ticket.uid}}</a>
+                    </strong>
+                    <small><span class="fui-arrow-right text-muted"></span></small>
+                    {{ticket.subject}}
+                    <div class="pull-right">
+                        <span class="text-muted">{{ticket.status}}</span>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    {{ticket.description}}
+                </div>
+            </div>
+        </div>
 
+        <div class="col-sm-4">
+            <div class="btn-group btn-block">
+                <button class="btn btn-inverse btn-block dropdown-toggle btn-sm" data-toggle="dropdown">
+                    <span class="pull-left text-muted">
+                        <span class="fui-gear"></span>
+                        Status
+                    </span>
+                    <span class="pull-right">
+                        {{ticket.status}}
+                        <b class="caret"></b>
+                    </span>
+                    &nbsp;
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li class="{{#if $eq ticket.status 'new'}}active{{/if}}">
+                        <a href="" class="setStatusNew">
+                            <span class="fui-alert-circle"></span> &nbsp;
+                            New
+                        </a>
+                    </li>
+                    <li class="{{#if $eq ticket.status 'open'}}active{{/if}}">
+                        <a href="" class="setStatusOpen">
+                            <span class="fui-question-circle"></span> &nbsp;
+                            Open
+                        </a>
+                    </li>
+                    <li class="{{#if $eq ticket.status 'closed'}}active{{/if}}">
+                        <a href="" class="setStatusClosed">
+                            <span class="fui-check"></span> &nbsp;
+                            Closed
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="btn-group btn-block">
+                <button class="btn btn-inverse btn-block dropdown-toggle btn-sm" data-toggle="dropdown">
+                    <span class="pull-left text-muted">
+                        <span class="fui-user"></span>
+                        Assignees
+                    </span>
+                    <span class="pull-right">
+                        {{#if ticket.assignees.count}}
+                            ...
+                        {{else}}
+                            None yet
+                        {{/if}}
+                        <b class="caret"></b>
+                    </span>
+                    &nbsp;
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <a href="">
+                            <span class="fui-home"></span>
+                            &nbsp; View profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="fui-chat"></span>
+                            &nbsp; Send message
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="fui-alert-circle"></span>
+                            &nbsp; Report abuse
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="btn-group btn-block">
+                <button class="btn btn-inverse btn-block dropdown-toggle btn-sm" data-toggle="dropdown">
+                    <span class="pull-left text-muted">
+                        <span class="fui-user"></span>
+                        Author
+                    </span>
+                    <span class="pull-right">
+                        {{ticket.author.email}}
+                        <b class="caret"></b>
+                    </span>
+                    &nbsp;
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <a href="">
+                            <span class="fui-home"></span>
+                            &nbsp; View profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="fui-chat"></span>
+                            &nbsp; Send message
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="fui-alert-circle"></span>
+                            &nbsp; Report abuse
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <a class="btn btn-default btn-block btn-sm">
+                <span class="pull-left">
+                    <span class="fui-time"></span>
+                    Updated
+                </span>
+                <span class="pull-right">{{timeAgo ticket.updatedAt}}</span>
+                &nbsp;
+            </a>
+
+            <a class="btn btn-default btn-block btn-sm">
+                <span class="pull-left">
+                    <span class="fui-time"></span>
+                    Created
+                </span>
+                <span class="pull-right">{{timeAgo ticket.createdAt}}</span>
+                &nbsp;
+            </a>
+        </div>
+    </div>
 </template>

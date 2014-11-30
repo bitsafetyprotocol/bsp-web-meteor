@@ -5,6 +5,8 @@ Meteor.publish "tickets_index", ->
   Tickets.find({}, {sort: {uid: -1}})
 
 Meteor.publish "tickets_show", (uid) ->
-  Tickets.find
-    uid: parseInt(uid)
+  [
+    Tickets.find { uid: parseInt(uid) }
+    TicketUpdates.find { uid: parseInt(uid) }
+  ]
 

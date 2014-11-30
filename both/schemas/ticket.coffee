@@ -4,9 +4,9 @@ Schemas.Ticket = new SimpleSchema
     type: Number
     min: 1
     autoValue: ->
-      return @value if @isSet
+      return unless @isInsert
       last = Tickets.findOne({}, {sort: {uid: -1}, fields: {uid: 1}})?.uid || 0
-      return last + 1
+      last + 1
   subject:
     type: String
     max: 200
@@ -19,15 +19,35 @@ Schemas.Ticket = new SimpleSchema
     allowedValues: ['new', 'open', 'closed']
   authorId:
     type: String
-    autoValue: ->
-      return @value if @isSet
-      @userId
-    optional: true
+    autoValue: -> @userId if @isInsert
+#    optional: true
   assigneeIds:
     type: [String]
-    optional: true
-  lastUpdate:
+    defaultValue: []
+  createdAt:
+    type: Date
+    autoValue: -> new Date if @isInsert
+  updatedAt:
     type: Date
     autoValue: -> new Date
+
+Schemas.TicketUpdate = new SimpleSchema
+  createdAt:
+    type: Date
+    autoValue: -> new Date if @isInsert
+  ticketId:
+    type: String
+  userId:
+    type: String
+    autoValue: -> @userId if @isInsert
+  comment:
+    type: String
+    max: 1024
+    optional: true
+  fields:
+    type: [Object]
+    blackbox: true
+    minCount: 1
+    maxCount: 16
 
 Tickets.attachSchema Schemas.Ticket
