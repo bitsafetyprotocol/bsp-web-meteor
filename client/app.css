@@ -29,6 +29,8 @@ body {
 
 .no-margin-bottom { margin-bottom: 0px !important; }
 .no-margin-top { margin-top: 0px !important; }
+.no-margin { margin: 0px !important; }
+.no-padding { padding: 0px !important; }
 
 
 .table.ticket-changes td {
@@ -42,9 +44,10 @@ body {
 }
 
 #ticketCommentForm .panel-body {
-    padding: 10px;
+    padding: 0px;
 }
 
 #ticketCommentForm textarea {
+    border: none;
     resize: none;
 }

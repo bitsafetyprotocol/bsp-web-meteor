@@ -18,9 +18,24 @@ Template.TicketsShow.destroyed = ->
 Template.TicketShowCommentForm.events
   'click .postComment': (e, tpl) ->
     id = @ticket()._id
-    comment = tpl.$('textarea').val()
-    console.log id, comment
+    comment = tpl.$('#TicketCommentInput').val()
     Meteor.call 'ticketsPostComment', id, comment
+    App.EpicEditor.reset()
+    App.EpicEditor.focus()
+
+Template.TicketShowCommentForm.rendered = ->
+  editorOptions =
+    container: 'epicEditor'
+    basePath: ''
+    autogrow: true
+    theme:
+      base: '/epiceditor/themes/base/epiceditor.css'
+      preview: '/epiceditor/themes/preview/github.css'
+      editor: '/epiceditor/themes/editor/epic-light.css'
+    clientSideStorage: false
+    
+  App.EpicEditor = new EpicEditor(editorOptions).load()
+  App.EpicEditor.reset = -> @importFile()
 
 Template.TicketUpdatesPartial.events
   'click .close': (e, tpl)-> Meteor.call 'ticketsDeleteUpdate', @_id

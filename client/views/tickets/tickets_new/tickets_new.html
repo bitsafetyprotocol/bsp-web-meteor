@@ -1,10 +1,15 @@
 <template name="TicketsNew">
     {{#autoForm collection='Tickets' id='newTicket' type='method' meteormethod='ticketsInsert'}}
-      <fieldset>
-          <legend>Submit a ticket</legend>
-          {{> afQuickField name='subject' placeholder='Brief case explanation'}}
-          {{> afQuickField name='description' rows=4 placeholder='As much details as possible'}}
-      </fieldset>
-      <button type="submit" class="btn btn-primary">Submit</button>
+    <fieldset>
+        <legend>Submit a ticket</legend>
+        {{> afQuickField name='subject' placeholder='Brief case explanation'}}
+
+        <div class="form-group">
+          <div class="form-control no-padding" id="epicEditor">
+              {{> afFieldInput name='description' rows=4 placeholder='As much details as possible'}}
+          </div>
+        </div>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Submit</button>
     {{/autoForm}}
 </template>
