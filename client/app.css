@@ -51,3 +51,17 @@ body {
     border: none;
     resize: none;
 }
+
+@media (min-width: 768px) {
+    #ticketSidebarNav.affix { width: 220px; }
+}
+
+@media (min-width: 992px) {
+    #ticketSidebarNav.affix { width: 293px; }
+}
+
+@media (min-width: 1200px) {
+    #ticketSidebarNav.affix { width: 360px; }
+}
+
+#ticketSidebarNav.affix { top: 70px; }
