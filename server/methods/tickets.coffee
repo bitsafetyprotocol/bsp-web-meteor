@@ -1,7 +1,3 @@
-#
-# Tickets Methods
-#
-
 Meteor.methods
   ticketsDelete: (id) -> Tickets.remove id
   ticketsDeleteUpdate: (id) -> TicketUpdates.remove id
@@ -15,10 +11,19 @@ Meteor.methods
     id = Tickets.insert doc
     Tickets.findOne id
 
-#
-#   Example:
-#    '/app/tickets/update/email': function (email) {
-#      Users.update({_id: this.userId}, {$set: {'profile.email': email}});
-#    }
-#
-#
+  ticketsUserAdd: (ticketId, userId) ->
+    selector =
+      ticketId: ticketId
+      userId: userId
+
+    unless Tickets.findOne({ _id: ticketId }, { fields: { _id: 1 } })
+      throw new Meteor.Error 'ticket not found'
+    unless Users.findOne({ _id: userId }, { fields: { _id: 1 } })
+      throw new Meteor.Error 'user not found'
+    if TicketUsers.findOne(selector, { fields: { _id: 1 } })
+      throw new Meteor.Error 'existing record'
+
+    TicketUsers.insert selector
+
+  ticketsUserRemove: (ticketId, userId) ->
+    TicketUsers.remove ticketId: ticketId, userId: userId

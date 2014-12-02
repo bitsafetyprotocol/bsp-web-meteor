@@ -28,27 +28,8 @@ Tickets.before.update (userId, doc, fields, mod) ->
     ticketUid: doc.uid
     fields: changes
 
-
-Tickets.createStub = ->
-  rnd = Math.floor(Math.random() * 100500)
-  Tickets.insert
-    subject: "ticket #{rnd}"
-    description: "some very long description here"
-
 Tickets.helpers
   user: -> Users.findOne @userId
   userName: -> @user()?.getName() || 'Anonymous'
   assignees: -> Users.find _id: { $in: @assigneeIds }
   updates: -> TicketUpdates.find { ticketId: @_id }, { sort: { createdAt: 1 } }
-
-@TicketUpdates = new Meteor.Collection 'ticket_updates'
-
-TicketUpdates.before.insert (userId, doc) ->
-  doc.userId = userId
-  doc.createdAt = new Date
-
-TicketUpdates.helpers
-  user: -> Users.findOne @userId
-  userName: -> @user()?.getName() || 'Anonymous'
-  ticket: -> Tickets.findOne @ticketId
-

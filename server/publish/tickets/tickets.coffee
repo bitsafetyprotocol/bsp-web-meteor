@@ -23,8 +23,12 @@ Meteor.publishComposite 'tickets_show', (uid) ->
           Users.find ticketUpdate.userId
       ]
     }
+    {
+      find: (ticket) ->
+        TicketUsers.find { ticketId: ticket._id }
+      children: [
+        find: (ticketUser) ->
+          Users.find ticketUser._id
+      ]
+    }
   ]
-
-Meteor.publish "ticket_updates", ->
-  TicketUpdates.find()
-

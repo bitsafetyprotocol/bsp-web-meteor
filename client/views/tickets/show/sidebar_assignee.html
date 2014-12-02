@@ -1,0 +1,15 @@
+<template name="TicketSidebarAssignee">
+    <div class="panel panel-inverted panel-assignees">
+        <div class="panel-heading text-muted">
+            <span class="fui-user"></span>
+            Assignees
+        </div>
+        <div class="panel-body">
+            <select multiple="multiple" class="form-control multiselect multiselect-inverse ticket-sidebar-assignee">
+                {{#each users}}
+                    <option value="{{_id}}">{{getName}}</option>
+                {{/each}}
+            </select>
+        </div>
+    </div>
+</template>
