@@ -1,7 +1,9 @@
 <template name="Breadcrumbs">
+    {{#if $gt sections.length 1}}
     <ul class="breadcrumb">
       {{#each sections}}
         <li class="{{#if active}}active{{/if}}"><a href="{{urlFor route data=params}}">{{label}}</a></li>
       {{/each}}
     </ul>
+    {{/if}}
 </template>

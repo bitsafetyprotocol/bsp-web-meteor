@@ -53,7 +53,10 @@ body {
 }
 
 @media (min-width: 768px) {
-    #ticketSidebarNav.affix { width: 220px; }
+    #ticketSidebarNav.affix {
+        width: 220px;
+        top: 70px;
+    }
 }
 
 @media (min-width: 992px) {
@@ -64,4 +67,6 @@ body {
     #ticketSidebarNav.affix { width: 360px; }
 }
 
-#ticketSidebarNav.affix { top: 70px; }
+#ticketSidebarNav {
+    margin-bottom: 20px;
+}

@@ -19,4 +19,7 @@ raix:handlebar-helpers
 dburles:collection-helpers
 matb33:collection-hooks
 markdown
+meteorhacks:kadira
+meteorhacks:zones
+meteorhacks:subs-manager
 

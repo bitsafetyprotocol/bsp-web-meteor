@@ -1,6 +1,13 @@
 <template name="TicketsShow">
     <div class="row">
-        <div class="col-sm-8">
+
+        <div class="col-sm-4 col-sm-push-8" id="ticketSidebar">
+            <div id="ticketSidebarNav">
+                {{> TicketsShowSidebar }}
+            </div>
+        </div>
+
+        <div class="col-sm-8 col-sm-pull-4">
 
             <div class="panel {{infoPanelClass ticket.status}} panel-small">
                 <div class="panel-heading clearfix">
@@ -23,7 +30,7 @@
                     <div class="lead no-margin-bottom text-center">
                         {{ticket.subject}}
                     </div>
-                    <hr class="no-margin"/>
+                    <hr class="no-margin-top"/>
                     {{#markdown}}{{ticket.description}}{{/markdown}}
                 </div>
             </div>
@@ -33,12 +40,6 @@
             {{/each}}
 
             {{> TicketShowCommentForm }}
-        </div>
-
-        <div class="col-sm-4" id="ticketSidebar">
-            <div id="ticketSidebarNav">
-                {{> TicketsShowSidebar }}
-            </div>
         </div>
 
     </div>

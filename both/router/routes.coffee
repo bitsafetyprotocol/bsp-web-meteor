@@ -27,4 +27,4 @@ Router.route "/tickets/:uid",
     author: -> Meteor.users.findOne(@ticket().authorId)
 
 Router.onBeforeAction AccountsTemplates.ensureSignedIn,
-  except: ['Home']
+  except: ['Home', 'atSignIn', 'atSignUp']

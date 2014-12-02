@@ -1,2 +1,2 @@
-AccountsTemplates.configureRoute('signIn')
+AccountsTemplates.configureRoute('signIn', redirect: '/')
 AccountsTemplates.configureRoute('signUp')
