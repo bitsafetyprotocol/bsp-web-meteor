@@ -9,7 +9,7 @@ Tickets.before.insert (userId, doc) ->
   doc.uid = last + 1
 
 Tickets.before.update (userId, doc, fields, mod) ->
-  console.log "updating ticket ##{doc.uid}"
+  mod.$set.updatedAt = new Date
   changes = []
 
   for fieldName, newValue of mod.$set
@@ -28,8 +28,6 @@ Tickets.before.update (userId, doc, fields, mod) ->
     ticketUid: doc.uid
     fields: changes
 
-  mod.$set.updatedAt = new Date
-  console.log changes
 
 Tickets.createStub = ->
   rnd = Math.floor(Math.random() * 100500)
