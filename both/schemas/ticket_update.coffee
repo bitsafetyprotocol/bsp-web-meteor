@@ -6,8 +6,10 @@ Schema.TicketUpdate = new SimpleSchema
     optional: true
   ticketId:
     type: String
+    optional: true
   ticketUid:
     type: String
+    optional: true
   userId:
     type: String
     optional: true

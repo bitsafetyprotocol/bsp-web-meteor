@@ -16,11 +16,11 @@ Meteor.methods
       ticketId: ticketId
       userId: userId
 
-    unless Tickets.findOne({ _id: ticketId }, { fields: { _id: 1 } })
+    unless Tickets.findOne(ticketId, fields: { _id: 1 })
       throw new Meteor.Error 'ticket not found'
-    unless Users.findOne({ _id: userId }, { fields: { _id: 1 } })
+    unless Users.findOne(userId, fields: { _id: 1 })
       throw new Meteor.Error 'user not found'
-    if TicketUsers.findOne(selector, { fields: { _id: 1 } })
+    if TicketUsers.findOne(selector, fields: { _id: 1 })
       throw new Meteor.Error 'existing record'
 
     TicketUsers.insert selector
