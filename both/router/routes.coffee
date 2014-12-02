@@ -23,10 +23,12 @@ Router.route "/tickets/new",
 Router.route "/tickets/:uid",
   name: "tickets.show"
   waitOn: ->
-    Meteor.subscribe('tickets_show', @params.uid)
-  data:
-    ticket: -> Tickets.findOne()
-    author: -> Users.findOne(@ticket().authorId)
+    Meteor.subscribe 'tickets_show', @params.uid
+  data: ->
+    return unless ticket = Tickets.findOne { uid: parseInt(@params.uid) }
+
+    ticket: ticket
+    author: Users.findOne(ticket.authorId)
 
 Router.onBeforeAction AccountsTemplates.ensureSignedIn,
   except: ['Home', 'atSignIn', 'atSignUp']

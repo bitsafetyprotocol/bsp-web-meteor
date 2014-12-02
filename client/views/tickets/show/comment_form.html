@@ -1,0 +1,18 @@
+<template name="TicketCommentForm">
+    <div class="panel panel-info panel-small" id="ticketCommentForm">
+        <div class="panel-heading panel-heading-condensed clearfix">
+            <a href="" class="">
+                <span class="fui-user"></span> {{ticket.userName}}
+            </a>
+
+            <small><span class="fui-arrow-right text-muted"></span></small>
+
+            new comment
+            <button class="btn btn-info btn-sm pull-right postComment">Post</button>
+        </div>
+        <div class="panel-body" id="epicEditor">
+            <textarea id="TicketCommentInput"></textarea>
+        </div>
+        <span class="text-muted shortcut-hint">{{modKey}}+Enter to post</span>
+    </div>
+</template>

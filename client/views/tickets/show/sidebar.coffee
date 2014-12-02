@@ -1,17 +1,21 @@
-Template.TicketsShowSidebar.events
-  'click .setStatusNew':    -> Meteor.call 'ticketsSetStatus', @ticket()._id, 'new'
-  'click .setStatusOpen':   -> Meteor.call 'ticketsSetStatus', @ticket()._id, 'open'
-  'click .setStatusClosed': -> Meteor.call 'ticketsSetStatus', @ticket()._id, 'closed'
+Template.TicketSidebar.events
+  'click .setStatusNew':    -> Meteor.call 'ticketsSetStatus', @ticket._id, 'new'
+  'click .setStatusOpen':   -> Meteor.call 'ticketsSetStatus', @ticket._id, 'open'
+  'click .setStatusClosed': -> Meteor.call 'ticketsSetStatus', @ticket._id, 'closed'
 
-Template.TicketsShowSidebar.rendered = ->
-  Template.TicketsShowSidebar.safariFix '#ticketSidebarNav'
-  $('#ticketSidebarNav').affix
+Template.TicketSidebar.rendered = ->
+  Template.TicketSidebar.safariFix '#ticketSidebarNav'
+
+  baseOffset = $('#ticketSidebar').offset().top
+  stickyOffset = $('.breadcrumb').outerHeight(true)
+
+  $('#ticketSidebar').affix
     offset:
       top: ->
-        fix = $('#ticketSidebarNav').hasClass 'affix-top'
-        if fix then 65 else 131
+        sticky = $('#ticketSidebar').hasClass 'affix'
+        if sticky then baseOffset else stickyOffset
 
-Template.TicketsShowSidebar.safariFix = (elemId) ->
+Template.TicketSidebar.safariFix = (elemId) ->
   # Check if we are in safari
   return unless navigator.userAgent.indexOf('Safari') != -1
   return unless navigator.userAgent.indexOf('Chrome') == -1

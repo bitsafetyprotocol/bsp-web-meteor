@@ -1,0 +1,46 @@
+<template name="TicketsShow">
+    <div class="row">
+
+        <div class="col-sm-4 col-sm-push-8">
+            <div id="ticketSidebar">
+                {{> TicketSidebar }}
+            </div>
+        </div>
+
+        <div class="col-sm-8 col-sm-pull-4">
+
+            <div class="panel {{infoPanelClass ticket.status}} panel-small">
+                <div class="panel-heading clearfix">
+                    <a href="" class="">
+                        <span class="fui-user"></span> {{ticket.userName}}
+                    </a>
+
+                    <small><span class="fui-arrow-right text-muted"></span></small>
+
+                    reported
+
+                    <a href="{{urlFor 'tickets.show' uid=ticket.uid}}">
+                        case #{{ticket.uid}}
+                    </a>
+                    <span class="text-muted pull-right">
+                        {{timeAgo ticket.createdAt}}
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <div class="lead no-margin-bottom text-center">
+                        {{ticket.subject}}
+                    </div>
+                    <hr class="no-margin-top"/>
+                    {{#markdown}}{{ticket.description}}{{/markdown}}
+                </div>
+            </div>
+
+            {{#each ticket.updates}}
+                {{> TicketShowUpdate}}
+            {{/each}}
+
+            {{> TicketCommentForm }}
+        </div>
+
+    </div>
+</template>

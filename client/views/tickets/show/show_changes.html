@@ -1,0 +1,27 @@
+<template name="TicketShowChanges">
+    {{#if comment}}
+        <div class="row">
+            <div class="col-xs-3">
+                <code>comment</code>
+            </div>
+            <div class="col-xs-9">
+            <span>
+                {{#markdown}}{{comment}}{{/markdown}}
+            </span>
+            </div>
+        </div>
+    {{/if}}
+    {{#each fields}}
+        <div class="row">
+            <div class="col-xs-3">
+                <code>{{name}}</code>
+            </div>
+            <div class="col-xs-9">
+            <span class="text-muted">
+                {{before}} <small class="fui-arrow-right"></small>
+            </span>
+                {{after}}
+            </div>
+        </div>
+    {{/each}}
+</template>

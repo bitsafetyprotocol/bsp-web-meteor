@@ -1,0 +1,19 @@
+#ticketSidebar {
+  margin-bottom: 20px;
+  &.affix {
+    position: static;
+
+    @media (min-width: 768px) {
+      position: fixed;
+      width: 220px;
+      top: 73px;
+    }
+    @media (min-width: 992px) {
+      width: 293px;
+    }
+
+    @media (min-width: 1200px) {
+      width: 360px;
+    }
+  }
+}

@@ -11,7 +11,9 @@ Meteor.publishComposite 'tickets_show', (uid) ->
   children: [
     {
       find: (ticket) ->
-        Users.find ticket.userId
+        ids = ticket.assigneeIds || []
+        ids.push ticket.userId
+        Users.find _id: { $in: ids }
     }
     {
       find: (ticket) ->

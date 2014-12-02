@@ -1,0 +1,24 @@
+<template name="TicketShowUpdate">
+    <div class="panel panel-info panel-small">
+        <div class="panel-heading panel-heading-condensed clearfix">
+            <a href="" class="">
+                <span class="fui-user"></span> {{userName}}
+            </a>
+
+            <small><span class="fui-arrow-right text-muted"></span></small>
+
+            updated
+
+            <a href="{{urlFor 'tickets.show' uid=ticket.uid}}">
+                case #{{ticket.uid}}
+            </a>
+            <span class="text-muted pull-right">
+                {{timeAgo createdAt}}
+                &nbsp; <button class="close">&times;</button>
+            </span>
+        </div>
+        <div class="panel-body">
+            {{> TicketShowChanges}}
+        </div>
+    </div>
+</template>
