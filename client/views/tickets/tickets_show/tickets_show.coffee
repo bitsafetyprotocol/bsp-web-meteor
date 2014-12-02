@@ -14,6 +14,9 @@ Template.TicketsShow.rendered = ->
 
 Template.TicketsShow.destroyed = ->
 
+Template.TicketShowCommentForm.helpers
+  modKey: ->
+    if navigator.platform.indexOf('Mac') >= 0 then 'Cmd' else 'Ctrl'
 
 Template.TicketShowCommentForm.events
   'click .postComment': (e, tpl) ->
@@ -34,8 +37,14 @@ Template.TicketShowCommentForm.rendered = ->
       editor: '/epiceditor/themes/editor/epic-light.css'
     clientSideStorage: false
     
-  App.EpicEditor = new EpicEditor(editorOptions).load()
-  App.EpicEditor.reset = -> @importFile()
+  editor = new EpicEditor(editorOptions)
+  editor.load ->
+    $(editor.editor).on 'keydown', (e) ->
+      if (e.metaKey || e.ctrlKey) and e.keyCode is 13
+        $('#ticketCommentForm .postComment').trigger 'click'
+      true
+  editor.reset = -> @importFile()
+  App.EpicEditor = editor
 
 Template.TicketUpdatesPartial.events
   'click .close': (e, tpl)-> Meteor.call 'ticketsDeleteUpdate', @_id

@@ -107,16 +107,13 @@
 
             <small><span class="fui-arrow-right text-muted"></span></small>
 
-            new comment for
-
-            <a href="{{urlFor 'tickets.show' uid=ticket.uid}}">
-                case #{{ticket.uid}}
-            </a>
-            <button class="btn btn-info btn-sm pull-right postComment">Send</button>
+            new comment
+            <button class="btn btn-info btn-sm pull-right postComment">Post</button>
         </div>
         <div class="panel-body" id="epicEditor">
             <textarea id="TicketCommentInput"></textarea>
         </div>
+        <span class="text-muted shortcut-hint">{{modKey}}+Enter to post</span>
     </div>
 </template>
 

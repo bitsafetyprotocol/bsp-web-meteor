@@ -52,6 +52,15 @@ body {
     resize: none;
 }
 
+#ticketCommentForm { position: relative; }
+
+#ticketCommentForm .shortcut-hint {
+    position: absolute;
+    bottom: 0px;
+    right: 5px;
+    font-size: 10px;
+}
+
 @media (min-width: 768px) {
     #ticketSidebarNav.affix {
         width: 220px;
