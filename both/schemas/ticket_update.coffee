@@ -3,12 +3,14 @@
 Schema.TicketUpdate = new SimpleSchema
   createdAt:
     type: Date
+    optional: true
   ticketId:
     type: String
   ticketUid:
     type: String
   userId:
     type: String
+    optional: true
   comment:
     type: String
     max: 1024
