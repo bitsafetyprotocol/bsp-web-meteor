@@ -20,4 +20,3 @@ Users.helpers
     return @emails[0].address if @emails[0]
 
     'Anonymous'
-

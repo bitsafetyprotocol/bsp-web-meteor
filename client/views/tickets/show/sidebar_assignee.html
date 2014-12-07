@@ -5,11 +5,12 @@
             Assignees
         </div>
         <div class="panel-body">
-            <select multiple="multiple" class="form-control multiselect multiselect-inverse ticket-sidebar-assignee">
-                {{#each users}}
-                    <option value="{{_id}}">{{getName}}</option>
-                {{/each}}
-            </select>
+            <input type="hidden" class="select2 form-control multiselect multiselect-inverse ticket-sidebar-assignee"/>
+            <!--<select multiple="multiple" class="form-control multiselect multiselect-inverse ticket-sidebar-assignee">-->
+                <!--{{#each users}}-->
+                    <!--<option value="{{_id}}">{{getName}}</option>-->
+                <!--{{/each}}-->
+            <!--</select>-->
         </div>
     </div>
 </template>

@@ -32,3 +32,6 @@ Meteor.publishComposite 'tickets_show', (uid) ->
       ]
     }
   ]
+
+Meteor.publish 'tickets_user_query', (query) ->
+  Users.queryEmails query
