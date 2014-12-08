@@ -11,27 +11,19 @@ Meteor.publishComposite 'tickets_show', (uid) ->
   children: [
     {
       find: (ticket) ->
-        ids = ticket.assigneeIds || []
-        ids.push ticket.userId
-        Users.find _id: { $in: ids }
-    }
-    {
-      find: (ticket) ->
         TicketUpdates.find(ticketId: ticket._id)
       children: [
         find: (ticketUpdate) ->
           Users.find ticketUpdate.userId
       ]
     }
-    {
-      find: (ticket) ->
-        TicketUsers.find { ticketId: ticket._id }
-      children: [
-        find: (ticketUser) ->
-          Users.find ticketUser._id
-      ]
-    }
   ]
 
-Meteor.publish 'tickets_user_query', (query) ->
-  Users.queryEmails query
+Meteor.publishComposite 'ticket_users', (uid) ->
+  find: (ticket) ->
+    id = Tickets.findOne({ uid: parseInt(uid) }, { fields: { _id: 1 } })?._id
+    TicketUsers.find { ticketId: id }
+  children: [
+    find: (ticketUser) ->
+      Users.find ticketUser.userId
+  ]

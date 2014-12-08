@@ -13,8 +13,7 @@ Template.Breadcrumbs.helpers
 
     ctrl = Router.current()
     current = ctrl.route.getName()
-    params  = {}
-    try params = _.extend {}, ctrl.route.params(location.pathname)
+    params  = ctrl.state.get('params') || {}
 
     if current.indexOf('tickets.') >= 0
       sections.push

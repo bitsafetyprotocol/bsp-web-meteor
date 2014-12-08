@@ -19,12 +19,19 @@ Router.route "/tickets/new",
 
 Router.route "/tickets/:uid",
   name: "tickets.show"
-  waitOn: -> App.subsManager.subscribe 'tickets_show', @params.uid
+  waitOn: ->
+    [
+      App.subsManager.subscribe 'tickets_show', @params.uid
+      App.subsManager.subscribe 'ticket_users', @params.uid
+    ]
   data: ->
     return unless ticket = Tickets.findOne { uid: parseInt(@params.uid) }
 
     ticket: ticket
     author: Users.findOne(ticket.authorId)
+  action: ->
+    @state.set 'params', _.extend {}, @params
+    @render()
 
 Router.onBeforeAction AccountsTemplates.ensureSignedIn,
   except: ['Home', 'atSignIn', 'atSignUp']
