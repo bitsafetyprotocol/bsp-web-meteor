@@ -27,3 +27,7 @@ Meteor.methods
 
   ticketsUserRemove: (ticketId, userId) ->
     TicketUsers.remove ticketId: ticketId, userId: userId
+
+  queryEmails: (query) ->
+    users = Users.queryEmails(query).fetch()
+    _.map users, (user) -> { id: user._id, value: user.getName() }
