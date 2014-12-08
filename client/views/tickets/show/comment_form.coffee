@@ -21,11 +21,14 @@ Template.TicketCommentForm.rendered = ->
       editor: '/epiceditor/themes/editor/epic-light.css'
     clientSideStorage: false
 
-  editor = new EpicEditor(editorOptions)
-  editor.load ->
-    $(editor.editor).on 'keydown', (e) ->
-      if (e.metaKey || e.ctrlKey) and e.keyCode is 13
-        $('#ticketCommentForm .postComment').trigger 'click'
-      true
-  editor.reset = -> @importFile()
-  App.EpicEditor = editor
+  initEditor = ->
+    editor = new EpicEditor(editorOptions)
+    editor.load ->
+      $(editor.editor).on 'keydown', (e) ->
+        if (e.metaKey || e.ctrlKey) and e.keyCode is 13
+          $('#ticketCommentForm .postComment').trigger 'click'
+        true
+    editor.reset = -> @importFile()
+    App.EpicEditor = editor
+
+  Meteor.setTimeout initEditor, 100
