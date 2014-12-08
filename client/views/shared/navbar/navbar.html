@@ -11,8 +11,8 @@
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="{{isActiveRoute regex='Home'}}"><a href="/">Home</a></li>
-                    <li class="{{isActiveRoute regex='Tickets'}}"><a href="/tickets">Tickets</a></li>
+                    <li class="{{isActiveRoute regex='Home'}}"><a href="{{pathFor 'Home'}}">Home</a></li>
+                    <li class="{{isActiveRoute regex='Tickets'}}"><a href="{{pathFor 'tickets.index'}}">Tickets</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
 
@@ -23,7 +23,6 @@
                     {{> navLoginMenu}}
                   {{/if}}
                 </ul>
-
             </div>
         </div>
     </nav>
